@@ -3,9 +3,10 @@ int[][] prefix;
     public NumMatrix(int[][] matrix) {
         int r=matrix.length;
         int c= matrix[0].length;
-        prefix = new int[r + 1][c + 1];
+        prefix = new int[r][c];
         int sum=0;
         for(int i=0; i<r;i++) {
+            sum=0;
             for(int j=0;j<c;j++) {
                 prefix[i][j] = matrix[i][j] + sum;
                 sum += matrix[i][j];
@@ -17,7 +18,10 @@ int[][] prefix;
         int s=0;
         int k=row1;
         while(k<=row2) {
-            s += prefix[k][col2] - prefix[k][col1-1];
+            if(col1==0) {
+                s += prefix[k][col2];    }
+            else {
+            s += prefix[k][col2] - prefix[k][col1-1];   }
             k++;
         }
         return s;
