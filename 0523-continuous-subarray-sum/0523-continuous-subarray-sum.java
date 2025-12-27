@@ -10,7 +10,7 @@ class Solution {
                     return true;
                 }
             } else {
-                map.put(rem, i); 
+                map.put(sum%k, i); 
             }
         }
         return false;
