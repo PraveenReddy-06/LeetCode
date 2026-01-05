@@ -1,19 +1,21 @@
 class Solution {
+
+    static {
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
+    }
+
     public int[] dailyTemperatures(int[] temperatures) {
-        Stack<int[]> stack = new Stack<>();
-        int[] res=new int[temperatures.length];
-        for(int i=temperatures.length-1;i>=0;i--){
-             while(!stack.isEmpty() && temperatures[i] >= stack.peek()[0]){
+        int n = temperatures.length;
+        int[] res = new int[n];
+        Deque<Integer> stack = new ArrayDeque<>();
+
+        for (int i = n - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && temperatures[i] >= temperatures[stack.peek()]) {
                 stack.pop();
-             }
-             if(!stack.isEmpty())
-             { res[i]=stack.peek()[1]-i;}
-            else{
-                res[i]=0;
             }
-            stack.push(new int[]{temperatures[i],i});
+            res[i] = stack.isEmpty() ? 0 : stack.peek() - i;
+            stack.push(i);
         }
-        
         return res;
     }
 }
