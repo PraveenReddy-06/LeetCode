@@ -1,7 +1,7 @@
 class Solution {
     public String removeKdigits(String num, int k) {
         Stack<Integer> stack = new Stack<>();
-        String arr="";
+        StringBuilder arr = new StringBuilder();
         for(int i=0;i<num.length();i++){
             while(!stack.isEmpty() && num.charAt(stack.peek()) > num.charAt(i) && k>0){
                 stack.pop();
@@ -13,12 +13,14 @@ class Solution {
             stack.pop();
             k--;
         }
-        int i=0;
-        while(!stack.isEmpty()){
-            arr = num.charAt(stack.pop())+ arr;
+        
+         while (!stack.isEmpty()) {
+            arr.append(num.charAt(stack.pop()));
         }
-        arr = arr.replaceFirst("^0+","");
-        if(arr.length() == 0) return "0";
-        return arr;
+        arr.reverse();
+        while (arr.length() > 0 && arr.charAt(0) == '0') {
+            arr.deleteCharAt(0);
+        }
+        return arr.length() == 0 ? "0" : arr.toString();
     }
 }
