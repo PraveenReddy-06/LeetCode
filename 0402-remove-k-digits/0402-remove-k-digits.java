@@ -3,7 +3,7 @@ class Solution {
         Stack<Integer> stack = new Stack<>();
         String arr="";
         for(int i=0;i<num.length();i++){
-            while(!stack.isEmpty() && num.charAt(stack.peek()) >= num.charAt(i) && k>0){
+            while(!stack.isEmpty() && num.charAt(stack.peek()) > num.charAt(i) && k>0){
                 stack.pop();
                 k--;
             }
