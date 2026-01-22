@@ -1,26 +1,23 @@
 class Solution {
-    public int maxSumTwoNoOverlap(int[] nums, int firstLen, int secondLen) {
-        int f=firstLen;
-        int s=secondLen;
-
-        for(int i=1;i<nums.length;i++){
-            nums[i] += nums[i-1];
-        }
-
-        int i=0;
-        int m1=0;int m2=0;
+    public int maxSumTwoNoOverlap(int[] A, int L, int M) {
+        int sums[] = new int[A.length+1];
+        
+        for(int i=1;i<=A.length;i++)
+            sums[i] = A[i-1]+sums[i-1];
+        
+        int maxLval = 0;
         int ans=0;
-        for(int j=f; j<=nums.length-f; j++){
-            m1=Math.max(m1, nums[j]-nums[j-f]);
-            if(j+s<nums.length)
-                ans=Math.max(ans,nums[j+s]-nums[j]+m1);
+        for(int i=L;i<=A.length-M;i++)
+        {
+            maxLval = Math.max(maxLval,sums[i]-sums[i-L]);
+            ans = Math.max(ans,sums[i+M]-sums[i]+maxLval);
         }
-        for(int k=s ; k<=nums.length-s; k++){
-            m2=Math.max(m2,nums[k]-nums[k-s]);
-            if(k+f<nums.length)
-                 ans=Math.max(ans,nums[k+f]-nums[k]+m2);
+        int maxRval = 0 ;
+        for(int i=M;i<=A.length-L;i++)
+        {
+            maxRval = Math.max(maxRval,sums[i]-sums[i-M]);
+            ans = Math.max(ans,sums[i+L]-sums[i]+maxRval);
         }
-
         return ans;
     }
 }
