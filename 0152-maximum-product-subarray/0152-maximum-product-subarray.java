@@ -5,10 +5,10 @@ class Solution {
         int max=Integer.MIN_VALUE;
         int n=nums.length;
         for(int i=0;i<n;i++){
-            if(nums[i]==0){
+            if(prefix==0){
                 prefix=1;
             }
-            if(nums[n-i-1]==0){
+            if(sufix==0){
                 sufix=1;
             }
             prefix=prefix*nums[i];
